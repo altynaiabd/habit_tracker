@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView
 
-from apps.user.forms import UserModelCreationForm
+from apps.user.forms import UserModelCreationForm, UserProfileForm
 
 
 class HomepageView(TemplateView):
@@ -50,3 +50,16 @@ class LogInView(LoginView):
         if self.request.user.is_authenticated:
             return redirect('homepage')
         return self.render_to_response(self.get_context_data())
+
+
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=request.user.userprofile)
+
+    context = {'form': form}
+    return render(request, 'users/profile.html', context)

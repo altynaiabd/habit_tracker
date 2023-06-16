@@ -14,3 +14,9 @@ class UserModelChangeForm(UserChangeForm):
     class Meta:
         model = UserModel
         fields = ('username', 'first_name', 'gender', 'birth_date')
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ('username', 'first_name', 'gender', 'birth_date')
