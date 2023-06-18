@@ -43,7 +43,7 @@ class SignUpView(CreateView):
 
 
 class LogInView(LoginView):
-    template_name = 'users/login.html'
+    template_name = 'user/login.html'
 
     # Перенаправление со страницы входа в систему в случае, если пользователь уже прошел аутентификацию и вошел в систему
     def get(self, request, *args, **kwargs):
@@ -62,4 +62,5 @@ def profile(request):
         form = UserProfileForm(instance=request.user.userprofile)
 
     context = {'form': form}
-    return render(request, 'users/profile.html', context)
+    return render(request, 'user/profile.html', context)
+
